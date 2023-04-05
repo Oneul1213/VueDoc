@@ -1,0 +1,36 @@
+<html>
+    <header>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </header>
+    <body>
+        <div id="app">
+
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    a: 1,
+                    userProfile: {
+                        name: 'Anika'
+                    }
+                },
+            });
+
+            // 루트 레벨의 반응형 속성의 동적 추가 불가능.
+            vm.a // => 반응형
+            
+            vm.b = 2;   // 반응형 아님
+
+            // 중첩 객체에 대한 반응형 속성 추가 가능(Vue.set)
+            // => 셋 중 한 가지로 가능
+            Vue.set(vm.userProfile, 'age', 27);
+            vm.$set(vm.userProfile, 'age', 27);
+            vm.userProfile = Object.assign({}, vm.userProfile, {
+                age: 27,
+                favoriteColor: 'Vue Green'
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,33 @@
+<html>
+    <header>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </header>
+    <body>
+        <div id="app">
+
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    items: ['a', 'b', 'c']
+                },
+            });
+
+            // vm.items[0] = 'A';  // reactive 하지 않음.
+            // => 
+            let indexOfItem = 0;
+            let newValue = 'A';
+            // => 둘 중 하나로 대체
+            Vue.set(vm.items, indexOfItem, newValue);
+            vm.items.splice(indexOfItem, 1, newValue);
+
+            // vm.items.length = 2;    // reactive 하지 않음.
+            // =>
+            let newLegnth = 2;
+            vm.items.splice(newLength);
+
+        </script>
+    </body>
+</html>

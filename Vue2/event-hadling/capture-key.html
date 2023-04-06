@@ -1,0 +1,30 @@
+<html>
+    <header>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </header>
+    <body>
+        <div id="app">
+            <input type="text" @keyup.enter="capture('enter', $event)" placeholder="enter"/>
+            <input type="text" @keyup.tab="capture('tab', $event)" placeholder="tab"/>
+            <input type="text" @keyup.delete="capture('delete', $event)" placeholder="delete"/>
+            <input type="text" @keyup.esc="capture('esc', $event)" placeholder="esc"/>
+            <input type="text" @keyup.space="capture('space', $event)" placeholder="space"/>
+            <input type="text" @keyup.up="capture('up', $event)" placeholder="up"/>
+            <input type="text" @keyup.down="capture('down', $event)" placeholder="down"/>
+            <input type="text" @keyup.left="capture('left', $event)" placeholder="left"/>
+            <input type="text" @keyup.right="capture('right', $event)" placeholder="right"/>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {},
+                methods: {
+                    capture(key, e) {
+                        alert(key);
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

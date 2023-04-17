@@ -1,0 +1,48 @@
+<html>
+    <header>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </header>
+    <body>
+        <div id="app">
+            <button @click.ctrl="onClickAnother">A</button>
+            <button @click.ctrl.exact="onCtrlClick">B</button>
+            <button @click.exact="onClick">C</button>
+
+            <button @click.left="onLeftClick($event)">D</button>
+            <button @click.right="onRightClick($event)">E</button>
+            <button @click.middle="onMiddleClick($event)">F</button>
+        </div>
+
+        <script>
+            var vm = new Vue({
+                el: '#app',
+                data: {},
+                methods: {
+                    onClickAnother() {
+                        alert("click with ctrl +@");
+                    },
+                    onCtrlClick() {
+                        alert("exact click with only ctrl");
+                    },
+                    onClick() {
+                        alert("exact click ");
+                    },
+
+                    onLeftClick(e) {
+                        console.log(e);
+                        alert("left click");
+                    },
+                    onRightClick(e) {
+                        console.log(e);
+                        e.preventDefault();
+                        alert("right click");
+                    },
+                    onMiddleClick(e) {
+                        console.log(e);
+                        alert("middle click");
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

@@ -55,6 +55,43 @@
                 </select>
                 <span>Selected: {{ selectedFor }}</span>
             </div>
+
+            <div>
+                <input
+                    id="toggleCheck"
+                    type="checkbox"
+                    v-model="toggle"
+                    true-value="yes"
+                    false-value="no"
+                />
+                <label for="toggleCheck">{{ toggle }}</label>
+            </div>
+
+            <div>
+                <input
+                    id="a"
+                    type="radio"
+                    v-model="pick"
+                    :value="'a'"
+                />
+                <label for="a">a</label>
+                <input
+                    id="b"
+                    type="radio"
+                    v-model="pick"
+                    :value="'b'"
+                />
+                <label for="b">b</label>
+                <p>{{ pick }}</p>
+            </div>
+
+            <div>
+                <select v-model="selected2">
+                    <option disabled value="">select</option>
+                    <option :value="{ number: 123 }">123</option>
+                </select>
+                <p>{{ selected2 }}</p>
+            </div>
         </div>
 
         <script>
@@ -73,6 +110,10 @@
                         { text: 'Two', value: 'B' },
                         { text: 'Three', value: 'C' },
                     ],
+
+                    toggle: "yes",
+                    pick: "a",
+                    selected2: "",
                 },
             });
         </script>

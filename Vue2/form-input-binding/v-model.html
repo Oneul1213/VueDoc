@@ -48,6 +48,13 @@
                 <br>
                 <span>Selected: {{ selects }}</span>
             </div>
+
+            <div>
+                <select v-model="selectedFor">
+                    <option v-for="option in options" :value="option.value">{{ option.text }}</option>
+                </select>
+                <span>Selected: {{ selectedFor }}</span>
+            </div>
         </div>
 
         <script>
@@ -59,7 +66,13 @@
                     checked: true,
                     picked: "",
                     selected: "",
-                    selects: []
+                    selects: [],
+                    selectedFor: "A",
+                    options: [
+                        { text: 'One', value: 'A' },
+                        { text: 'Two', value: 'B' },
+                        { text: 'Three', value: 'C' },
+                    ],
                 },
             });
         </script>

@@ -92,6 +92,38 @@
                 </select>
                 <p>{{ selected2 }}</p>
             </div>
+
+            <div>
+                <span>lazy</span>
+                <input v-model.lazy="msg">
+                <br>
+
+                <span>not lazy</span>
+                <input v-model="msg">
+                <p>{{ msg }}</p>
+            </div>
+
+            <div>
+                <span>number</span>
+                <input v-model.number.lazy="num">
+                <br>
+
+                <span>not number</span>
+                <input v-model.lazy="num">
+                <p>typeof? {{ typeof num }}</p>
+            </div>
+
+            <div>
+                <span>not trim</span>
+                <input v-model="trimed">
+                <br>
+
+                <span>trim</span>
+                <input v-model.trim="trimed">
+                <br>
+
+                <span>|</span><span>{{ trimed }}</span><span>|</span>
+            </div>
         </div>
 
         <script>
@@ -114,6 +146,9 @@
                     toggle: "yes",
                     pick: "a",
                     selected2: "",
+                    msg: "",
+                    num: 0,
+                    trimed: "",
                 },
             });
         </script>

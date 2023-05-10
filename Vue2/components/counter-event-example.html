@@ -7,9 +7,26 @@
             <p>{{ total }}</p>
             <button-counter v-on:increment="incrementTotal"></button-counter>
             <button-counter v-on:increment="incrementTotal"></button-counter>
+
+            <div>
+                <button-native @click.native="doTheThing"></button-native>
+            </div>
+
+            <div>
+                <comp :foo.sync="bar"></comp>
+            </div>
         </div>
 
         <script>
+            Vue.component('button-native', {
+                template: '<p>{{ str }}</p>',
+                data: function () {
+                    return {
+                        str: "native click event?"
+                    };
+                },
+            });
+
             Vue.component('button-counter', {
                 template: '<button v-on:click="incrementCounter">{{ counter }}</button>',
                 data: function () {
@@ -25,14 +42,38 @@
                 },
             });
 
+            var comp = {
+                template: "<p @click='updateFoo'>{{ foo }}</p>",
+                props: ["foo"],
+                data() {
+                    return {
+
+                    };
+                },
+                methods: {
+                    updateFoo() {
+                        console.log("update foo to bar");
+                        this.$emit("update:foo", "bar");
+                    }
+                }
+            }
+
             new Vue({
                 el: '#counter-event-example',
+                components: {
+                    'comp': comp
+                },
                 data: {
-                    total: 0
+                    total: 0,
+                    bar: "foo",
                 },
                 methods: {
                     incrementTotal: function () {
                         this.total += 1;
+                    },
+
+                    doTheThing() {
+                        alert("native click event");
                     }
                 },
             });

@@ -1,0 +1,46 @@
+<html>
+    <header>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </header>
+    <body>
+        <div id="app">
+            <my-checkbox v-model="foo"></my-checkbox>
+        </div>
+
+        <script>
+            Vue.component('my-checkbox', {
+                model: {
+                    prop: 'checked',
+                    event: 'change'
+                },
+                props: {
+                    checked: Boolean,
+                    value: String
+                },
+                template: "<div>\
+                    <input type='checkbox' id='checkbox' name='checkbox' v-model='isChecked' :value='value'>\
+                    <label for='checkbox'>{{checked}}</label>\
+                </div>",
+
+                data() {
+                    return {
+                        isChecked: this.checked
+                    };
+                },
+
+                watch: {
+                    isChecked(now) {
+                        this.$emit("change", now);
+                    }
+                }
+            });
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    foo: false
+                },
+            });
+        </script>
+    </body>
+</html>

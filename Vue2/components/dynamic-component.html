@@ -1,0 +1,76 @@
+<html>
+    <header>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </header>
+    <body>
+        <div id="example">
+            <keep-alive>
+                <component :is="currentView"></component>
+            </keep-alive>
+
+            <radio @changed="onChanged"></radio>
+        </div>
+
+        <script>
+            Vue.component('radio', {
+                template: '\
+                    <div>\
+                        <input type="radio" id="home" value="home" v-model="checked">\
+                        <label for="home">home</label>\
+                        \
+                        <input type="radio" id="posts" value="posts" v-model="checked">\
+                        <label for="posts">posts</label>\
+                        \
+                        <input type="radio" id="archive" value="archive" v-model="checked">\
+                        <label for="archive">archive</label>\
+                    </div>\
+                ',
+
+                data() {
+                    return {
+                        checked: "home"
+                    }
+                },
+
+                watch: {
+                    checked(now) {
+                        this.$emit("changed", now);
+                    }
+                }
+            })
+
+            var vm = new Vue({
+                el: '#example',
+                data: {
+                    currentView: 'home'
+                },
+                components: {
+                    home: {
+                        template: "<div>This is <b>home</b> Component!</div>",
+                        created() {
+                            console.log("created Home");
+                        }
+                    },
+                    posts: {
+                        template: "<div>This is <b>posts</b> Component!</div>",
+                        created() {
+                            console.log("created Posts");
+                        }
+                    },
+                    archive: {
+                        template: "<div>This is <b>archive</b> Component!</div>",
+                        created() {
+                            console.log("created Archive");
+                        }
+                    }
+                },
+
+                methods: {
+                    onChanged(checked) {
+                        this.currentView = checked;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

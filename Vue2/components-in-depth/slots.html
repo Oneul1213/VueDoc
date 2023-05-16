@@ -1,0 +1,39 @@
+<html>
+    <header>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </header>
+    <body>
+        <div id="app">
+            <todo-list v-bind:todos="todos">
+                <template v-slot:todo="{ todo }">
+                    <span v-if="todo.isComplete"></span>
+                    {{ todo.text }}
+                </template>
+            </todo-list>
+        </div>
+
+        <script>
+            var TodoList = {
+                template: `
+                    <ul>
+                        <li
+                            v-for="todo in filteredTodos"
+                            v-bind:key="todo.id"
+                        >
+                            <slot name="todo" v-bind:todo="todo">
+                                {{ todo.text }}
+                            </slot>
+                        </li>
+                    </ul>
+                `
+            }
+            var vm = new Vue({
+                el: '#app',
+                components: {
+                    'todo-list': TodoList
+                },
+                data: {},
+            });
+        </script>
+    </body>
+</html>

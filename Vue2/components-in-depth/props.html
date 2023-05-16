@@ -1,0 +1,60 @@
+<html>
+    <header>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </header>
+    <body>
+        <div id="app">
+            <blog-post post-title="hello!" :likes="42" is-published v-bind="post"></blog-post>
+        </div>
+
+        <script>
+            Vue.component('blog-post', {
+                props: ['postTitle', 'id', 'title'],
+                template: '<div>\
+                    <h3>{{ postTitle }}</h3>\
+                    <p>{{ id }}</p>\
+                    <p>{{ title }}</p>\
+                    </div>'
+            })
+
+            Vue.component('my-component', {
+                props: {
+                    propA: Number,
+                    propB: [String, Number],
+                    propC: {
+                        type: String,
+                        required: true
+                    },
+                    propD: {
+                        type: Number,
+                        default: 100
+                    },
+                    // 객체나 배열은 기본 값을 반환하는 factory 함수로 기본 값 설정
+                    propE: {
+                        type: Object,
+                        default: function () {
+                            return { message: 'hello' }
+                        }
+                    },
+                    propF: {
+                        // 커스텀 유효성 검사 함수
+                        validator: function(value) {
+                            // 값이 아래의 세 문자열 중 하나여야 함.
+                            return ['success', 'warining', 'danger'].indexof(value) !== -1;
+                        }
+                    }
+                }
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    post: {
+                        id: 1,
+                        title: 'My Journey with Vue'
+                    }
+                },
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,38 @@
+<html>
+    <header>
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    </header>
+    <body>
+        <div id="app">
+            <base-input
+                v-model="username"
+                required
+                placeholder="Enter Your username"
+            ></base-input>
+        </div>
+
+        <script>
+            Vue.component('base-input', {
+                inheritAttrs: false,
+                props: ['label', 'value'],
+                template: `
+                    <label>
+                        {{ label }}
+                        <input
+                            v-bind="$attrs"
+                            v-bind:value="value"
+                            v-on:input="$emit('input', $event.target.value)"
+                        >
+                    </label>
+                `
+            })
+
+            var vm = new Vue({
+                el: '#app',
+                data: {
+                    username: ""
+                },
+            });
+        </script>
+    </body>
+</html>

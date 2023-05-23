@@ -1,11 +1,11 @@
 <template>
   <div>
-    <class-and-style-binding></class-and-style-binding>
+    <conditional-rendering></conditional-rendering>
   </div>
 </template>
 
 <script setup>
-import ClassAndStyleBinding from './components/ClassAndStyleBinding.vue';
+import ConditionalRendering from './components/ConditionalRendering.vue';
 </script>
 
 <style lang="scss" scoped>

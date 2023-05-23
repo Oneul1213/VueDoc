@@ -1,12 +1,10 @@
 <script setup>
-import Introduction from './components/Introduction.vue';
-import IntroductionComposition from './components/IntroductionComposition.vue';
+import ReactiveBasic from './components/ReactiveBasic.vue';
 </script>
 
 <template>
   <div class="root">
-    <introduction></introduction>
-    <introduction-composition></introduction-composition>
+    <reactive-basic></reactive-basic>
   </div>
 </template>
 

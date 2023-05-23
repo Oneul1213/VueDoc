@@ -1,13 +1,13 @@
-<script setup>
-import ReactiveBasic from './components/ReactiveBasic.vue';
-</script>
-
 <template>
-  <div class="root">
-    <reactive-basic></reactive-basic>
+  <div>
+    <computed-property></computed-property>
   </div>
 </template>
 
-<style scoped>
+<script setup>
+import ComputedProperty from './components/ComputedProperty.vue';
+</script>
+
+<style lang="scss" scoped>
 
 </style>

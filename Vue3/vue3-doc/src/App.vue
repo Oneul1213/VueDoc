@@ -1,11 +1,11 @@
 <template>
   <div>
-    <conditional-rendering></conditional-rendering>
+    <list-rendering></list-rendering>
   </div>
 </template>
 
 <script setup>
-import ConditionalRendering from './components/ConditionalRendering.vue';
+import ListRendering from './components/ListRendering.vue';
 </script>
 
 <style lang="scss" scoped>

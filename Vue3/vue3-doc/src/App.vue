@@ -1,11 +1,11 @@
 <template>
   <div>
-    <computed-property></computed-property>
+    <class-and-style-binding></class-and-style-binding>
   </div>
 </template>
 
 <script setup>
-import ComputedProperty from './components/ComputedProperty.vue';
+import ClassAndStyleBinding from './components/ClassAndStyleBinding.vue';
 </script>
 
 <style lang="scss" scoped>

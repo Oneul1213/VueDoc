@@ -1,11 +1,11 @@
 <template>
   <div>
-    <list-rendering></list-rendering>
+    <event-handling></event-handling>
   </div>
 </template>
 
 <script setup>
-import ListRendering from './components/ListRendering.vue';
+import EventHandling from './components/EventHandling.vue';
 </script>
 
 <style lang="scss" scoped>

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <event-handling></event-handling>
+    <form-input-binding></form-input-binding>
   </div>
 </template>
 
 <script setup>
-import EventHandling from './components/EventHandling.vue';
+import FormInputBinding from './components/FormInputBinding.vue';
 </script>
 
 <style lang="scss" scoped>

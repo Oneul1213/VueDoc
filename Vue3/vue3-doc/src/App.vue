@@ -1,11 +1,11 @@
 <template>
   <div>
-    <watcher></watcher>
+    <template-refs></template-refs>
   </div>
 </template>
 
 <script setup>
-import Watcher from './components/Watcher.vue';
+import TemplateRefs from "./components/TemplateRefs.vue";
 </script>
 
 <style lang="scss" scoped>

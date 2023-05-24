@@ -1,11 +1,11 @@
 <template>
   <div>
-    <form-input-binding></form-input-binding>
+    <lifecycle-hook></lifecycle-hook>
   </div>
 </template>
 
 <script setup>
-import FormInputBinding from './components/FormInputBinding.vue';
+import LifecycleHook from './components/LifecycleHook.vue'
 </script>
 
 <style lang="scss" scoped>

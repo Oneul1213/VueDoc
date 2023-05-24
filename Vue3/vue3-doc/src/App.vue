@@ -1,25 +1,41 @@
 <template>
-  <div :style="{ fontSize: postFontSize + 'em' }">
-    <BlogPost
-      v-for="post in posts"
-      :key="post.id"
-      :title="post.title"
-      @enlarge-text="postFontSize += 0.1"
+  <div>
+    <CustomInput v-model="searchText" />
+    <p>{{ searchText }}</p>
+    <br />
+
+    <MyComponent v-model:title="bookTitle" />
+    <p>{{ bookTitle }}</p>
+    <br/>
+
+    <UserName
+      v-model:first-name="first"
+      v-model:last-name="last"
     />
+    <p>{{ fullName }}</p>
+    <br/>
+
+    <MyComponent2 v-model.capitalize="myText"/>
+    <p>{{ myText }}</p>
   </div>
 </template>
 
 <script setup>
-import BlogPost from './components/BlogPost.vue';
-import { ref } from 'vue'
+import MyComponent2 from './components/MyComponent2.vue';
+import UserName from './components/UserName.vue';
+import MyComponent from './components/MyComponent.vue';
+import CustomInput from './components/CustomInput.vue';
+import { ref, computed } from 'vue'
 
-const posts = ref([
-  { id: 1, title: 'Vue와 함께한 나의 여행' },
-  { id: 2, title: 'Vue로 블로깅하기' },
-  { id: 3, title: 'Vue가 재밌는 이유' },
-])
 
-const postFontSize = ref(1)
+const searchText = ref('')
+const bookTitle = ref('')
+const first = ref('')
+const last = ref('')
+const myText = ref('')
+
+
+const fullName = computed(() => first.value + ' ' + last.value)
 </script>
 
 <style lang="scss" scoped>

@@ -1,11 +1,11 @@
 <template>
   <div>
-    <lifecycle-hook></lifecycle-hook>
+    <watcher></watcher>
   </div>
 </template>
 
 <script setup>
-import LifecycleHook from './components/LifecycleHook.vue'
+import Watcher from './components/Watcher.vue';
 </script>
 
 <style lang="scss" scoped>

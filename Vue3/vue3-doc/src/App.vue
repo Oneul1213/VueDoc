@@ -25,6 +25,11 @@
 import MyComponent3 from './components/MyComponent3.vue';
 import BaseLayout from './components/BaseLayout.vue';
 import FancyButton from './components/FancyButton.vue';
+import { defineAsyncComponent } from 'vue';
+
+const AsyncComp = defineAsyncComponent(() => {
+  import('./components/MyComponent.vue')
+})
 </script>
 
 <style lang="scss" scoped>

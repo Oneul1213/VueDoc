@@ -17,10 +17,16 @@
 
     <MyComponent2 v-model.capitalize="myText"/>
     <p>{{ myText }}</p>
+
+    <MyButton class="large" @click="click" />
+
+    <CustomLayout id="custom-layout" @click="changeValue" />
   </div>
 </template>
 
 <script setup>
+import CustomLayout from './components/CustomLayout.vue';
+import MyButton from './components/MyButton.vue';
 import MyComponent2 from './components/MyComponent2.vue';
 import UserName from './components/UserName.vue';
 import MyComponent from './components/MyComponent.vue';
@@ -36,6 +42,15 @@ const myText = ref('')
 
 
 const fullName = computed(() => first.value + ' ' + last.value)
+
+
+function click(e) {
+  console.log('hi')
+}
+
+function changeValue(e) {
+  console.log('changeValue')
+}
 </script>
 
 <style lang="scss" scoped>

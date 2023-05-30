@@ -1,26 +1,14 @@
 <template>
-  <div>
-    <label>
-      <input type="radio" v-model="activeComponent" :value="CompA" /> A
-    </label>
-
-    <label>
-      <input type="radio" v-model="activeComponent" :value="CompB" /> B
-    </label>
-
-    <p>현재 컴포넌트: {{ activeComponent === CompA ? 'A' : 'B' }}</p>
-    <KeepAlive :max="2">
-      <component :is="activeComponent" />
-    </KeepAlive>
+  <div class="outer">
+    <h3>Vue Teleport Example</h3>
+    <div>
+      <MyModal />
+    </div>
   </div>
 </template>
 
 <script setup>
-import CompA from '@/components/CompA.vue'
-import CompB from '@/components/CompB.vue'
-import { shallowRef } from 'vue'
-
-const activeComponent = shallowRef(CompA)
+import MyModal from '@/components/MyModal.vue'
 </script>
 
 <style scoped>

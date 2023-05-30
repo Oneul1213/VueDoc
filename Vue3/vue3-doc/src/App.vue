@@ -1,116 +1,90 @@
 <template>
-  <button @click="show = !show">토글</button>
-  <Transition name="fade" appear>
-    <p v-if="show">안녕</p>
-  </Transition>
-  <Transition name="slide-fade" appear>
-    <p v-if="show">안녕</p>
-  </Transition>
-  <Transition name="bounce" appear>
-    <p v-if="show" style="text-align: center;">
-      안녕! 여기에 탄력적인 텍스트가 있어요!
-    </p>
-  </Transition>
-  <Transition
-    name="custom-classes"
-    enter-active-class="animate__animated animate__tada"
-    leage-active-class="animate__animated animate__bounceOutRight"
-    appear
+  <button @click="addRandomIdx">추가</button>
+  <button @click="removeRandomIdx">제거</button>
+  <button @click="shuffle">섞기</button>
+  <TransitionGroup name="list" tag="ul">
+    <li v-for="item in items" :key="item">
+      {{ item }}
+    </li>
+  </TransitionGroup>
+  <input v-model="query" />
+  <TransitionGroup
+    tag="ul"
+    :css="false"
+    @before-enter="onBeforeEnter"
+    @enter="onEnter"
+    @leave="onLeave"
   >
-    <p v-if="show">안녕</p>
-  </Transition>
-  <Transition name="doc-state" mode="out-in">
-    <button v-if="docState === 'saved'" @click="docState = 'edited'">수정</button>
-    <button v-else-if="docState === 'edited'" @click="docState = 'editing'">저장</button>
-    <button v-else-if="docState === 'editing'" @click="docState = 'saved'">취소</button>
-  </Transition>
-
-  <br>
-  <label>
-    <input type="radio" v-model="activeComponent" :value="CompA" /> A
-  </label>
-  <label>
-    <input type="radio" v-model="activeComponent" :value="CompB" /> B
-  </label>
-  <Transition name="component-fade" mode="out-in">
-    <component :is="activeComponent"></component>
-  </Transition>
+    <li
+      v-for="(item, index) in computedList"
+      :key="item.msg"
+      :data-index="index"
+    >
+      {{ item.msg }}
+    </li>
+  </TransitionGroup>
 </template>
 
 <script setup>
-import { ref, shallowRef } from 'vue'
-import 'animate.css'
-import CompA from '@/components/CompA.vue'
-import CompB from '@/components/CompB.vue'
+import { shuffle as _shuffle } from 'lodash'
+import { ref, computed } from 'vue'
 
-const show = ref(true)
-const docState = ref('saved')
-const activeComponent = shallowRef(CompA)
+
+const items = ref([1, 2, 3, 4, 5])
+const current = ref(5)
+const query = ref('')
+const list = [
+    { msg: 'Bruce Lee' },
+    { msg: 'Jackie Chan' },
+    { msg: 'Chuck Norris' },
+    { msg: 'Jet Li' },
+    { msg: 'Kung Fury' },
+  ]
+
+
+const computedList = computed(() => {
+  return list.filter((item) => item.msg.toLowerCase().includes(query.value))
+})
+
+function addRandomIdx(e) {
+  const idx = Math.floor(Math.random() * items.value.length)
+  items.value.splice(idx, 0, ++current.value)
+}
+
+function removeRandomIdx(e) {
+  const idx = Math.floor(Math.random() * items.value.length)
+  items.value.splice(idx, 1)
+}
+
+function shuffle(e) {
+  items.value = _shuffle(items.value)
+}
+
+function onBeforeEnter(e) {
+
+}
+
+function onEnter(e) {
+  
+}
+
+function onLeave(e) {
+
+}
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
 }
-
-.fade-enter-from,
-.fade-leave-to {
+.list-enter-from,
+.list-leave-to {
   opacity: 0;
+  transform: translateX(30px);
 }
-
-.slide-fade-enter-active {
-  transition: all 0.3s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.8s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateX(20px);
-  opacity: 0;
-}
-
-.bounce-enter-active {
-  animation: bounce-in 0.5s;
-}
-.bounce-leave-active {
-  animation: bounce-in 0.5s reverse;
-}
-@keyframes bounce-in {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.25);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.doc-state-enter-active,
-.doc-state-leave-active {
-  transition: all 0.15s ease-out;
-}
-.doc-state-enter-from {
-  opacity: 0;
-  transform: translateY(30px);
-}
-.doc-state-leave-to {
-  opacity: 0;
-  transform: translateY(-30px);
-}
-
-.component-fade-enter-active,
-.component-fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-
-.component-fade-enter-from,
-.component-fade-leave-to {
-  opacity: 0;
+.list-leave-active {
+  position: absolute;
 }
 </style>

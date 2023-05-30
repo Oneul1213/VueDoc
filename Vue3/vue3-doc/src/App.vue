@@ -19,21 +19,33 @@
   >
     <p v-if="show">안녕</p>
   </Transition>
-  <div class="btn-container">
-    <Transition name="doc-state">
-      <button v-if="docState === 'saved'" @click="docState = 'edited'">수정</button>
-      <button v-else-if="docState === 'edited'" @click="docState = 'editing'">저장</button>
-      <button v-else-if="docState === 'editing'" @click="docState = 'saved'">취소</button>
-    </Transition>
-  </div>
+  <Transition name="doc-state" mode="out-in">
+    <button v-if="docState === 'saved'" @click="docState = 'edited'">수정</button>
+    <button v-else-if="docState === 'edited'" @click="docState = 'editing'">저장</button>
+    <button v-else-if="docState === 'editing'" @click="docState = 'saved'">취소</button>
+  </Transition>
+
+  <br>
+  <label>
+    <input type="radio" v-model="activeComponent" :value="CompA" /> A
+  </label>
+  <label>
+    <input type="radio" v-model="activeComponent" :value="CompB" /> B
+  </label>
+  <Transition name="component-fade" mode="out-in">
+    <component :is="activeComponent"></component>
+  </Transition>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, shallowRef } from 'vue'
 import 'animate.css'
+import CompA from '@/components/CompA.vue'
+import CompB from '@/components/CompB.vue'
 
 const show = ref(true)
 const docState = ref('saved')
+const activeComponent = shallowRef(CompA)
 </script>
 
 <style scoped>
@@ -79,26 +91,26 @@ const docState = ref('saved')
   }
 }
 
-.btn-container {
-  display: inline-block;
-  position: relative;
-  height: 1em;
-}
-
-button {
-  position: absolute;
-  white-space: pre;
-}
 .doc-state-enter-active,
 .doc-state-leave-active {
-  transition: all 0.25s ease-out;
+  transition: all 0.15s ease-out;
 }
 .doc-state-enter-from {
   opacity: 0;
-  transform: translateY(50px);
+  transform: translateY(30px);
 }
 .doc-state-leave-to {
   opacity: 0;
-  transform: translateY(-50px);
+  transform: translateY(-30px);
+}
+
+.component-fade-enter-active,
+.component-fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.component-fade-enter-from,
+.component-fade-leave-to {
+  opacity: 0;
 }
 </style>

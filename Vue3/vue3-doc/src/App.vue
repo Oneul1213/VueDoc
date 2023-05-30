@@ -1,12 +1,12 @@
 <template>
   <button @click="show = !show">토글</button>
-  <Transition name="fade">
+  <Transition name="fade" appear>
     <p v-if="show">안녕</p>
   </Transition>
-  <Transition name="slide-fade">
+  <Transition name="slide-fade" appear>
     <p v-if="show">안녕</p>
   </Transition>
-  <Transition name="bounce">
+  <Transition name="bounce" appear>
     <p v-if="show" style="text-align: center;">
       안녕! 여기에 탄력적인 텍스트가 있어요!
     </p>
@@ -15,9 +15,17 @@
     name="custom-classes"
     enter-active-class="animate__animated animate__tada"
     leage-active-class="animate__animated animate__bounceOutRight"
+    appear
   >
     <p v-if="show">안녕</p>
   </Transition>
+  <div class="btn-container">
+    <Transition name="doc-state">
+      <button v-if="docState === 'saved'" @click="docState = 'edited'">수정</button>
+      <button v-else-if="docState === 'edited'" @click="docState = 'editing'">저장</button>
+      <button v-else-if="docState === 'editing'" @click="docState = 'saved'">취소</button>
+    </Transition>
+  </div>
 </template>
 
 <script setup>
@@ -25,6 +33,7 @@ import { ref } from 'vue'
 import 'animate.css'
 
 const show = ref(true)
+const docState = ref('saved')
 </script>
 
 <style scoped>
@@ -68,5 +77,28 @@ const show = ref(true)
   100% {
     transform: scale(1);
   }
+}
+
+.btn-container {
+  display: inline-block;
+  position: relative;
+  height: 1em;
+}
+
+button {
+  position: absolute;
+  white-space: pre;
+}
+.doc-state-enter-active,
+.doc-state-leave-active {
+  transition: all 0.25s ease-out;
+}
+.doc-state-enter-from {
+  opacity: 0;
+  transform: translateY(50px);
+}
+.doc-state-leave-to {
+  opacity: 0;
+  transform: translateY(-50px);
 }
 </style>
